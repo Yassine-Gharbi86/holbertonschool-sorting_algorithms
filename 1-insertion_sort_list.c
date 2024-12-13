@@ -15,14 +15,14 @@ while (current)
 prev_node = current->prev;
 while (prev_node && prev_node->n > current->n)
 {
-prev_node->next = current->next;
+if (prev_node->prev)
+prev_node->prev->next = current;
 if (current->next)
 current->next->prev = prev_node;
 current->prev = prev_node->prev;
-if (prev_node->prev)
-prev_node->prev->next = current;
-prev_node->prev = current;
+prev_node->next = current->next;
 current->next = prev_node;
+prev_node->prev = current;
 if (!current->prev)
 *list = current;
 print_list(*list);
